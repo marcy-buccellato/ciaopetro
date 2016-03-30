@@ -1,0 +1,12 @@
+{% load comments %}
+
+{% get_comment_list for object as comment_list %}
+<ul class="list-unstyled comments-list">
+    {% for comment in comment_list %}
+    <li>
+        {{ comment.user_name }} says
+        <p class="date">{{ comment.submit_date }}</p>
+        <p>{{ comment.comment }}</p>
+    </li>
+</ul>
+{% endfor %}

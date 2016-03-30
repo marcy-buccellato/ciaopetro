@@ -1,0 +1,47 @@
+{% extends 'blog/../base.html' %}
+
+{% load django_markdown %}
+{% load comments %}
+
+{% block page_title %}
+    {{ object.title }} | {{ site.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="post post-detail">
+        {% if object.featured_image %}
+            <img width="100%" height="356" src="{{ object.featured_image.url }}">
+        {% endif %}
+        <div class="content">
+            <h1 class="title">{{ object.title }}</h1>
+            <p class="date">{{ object.published_date|date:"F d, Y" }}</p>
+            {% if object.tags.all %}
+                <p class="tags">Tagged under {{ object.tags.all|join:", " }}</p>
+            {% endif %}
+            <p>{{ object.text|markdown }}</p>
+        </div>
+    </div>
+    <div class="comments">
+        <h3>Comments</h3>
+        {% get_comment_count for object as comment_count %}
+        <p>{{ comment_count }} comments have been posted.</p>
+
+        {% render_comment_list for object %}
+
+        {% render_comment_form for object %}
+    </div>
+    <ul class="pager">
+        {% with previous_object=object.get_previous_by_created_date next_object=object.get_next_by_created_date %}
+            {% if previous_object %}
+                <li class="previous">
+                    <a href="{% url "post_detail" slug=previous_object.slug %}">&larr; {{ previous_object.title }}</a>
+                </li>
+            {% endif %}
+            {% if next_object %}
+                <li class="next">
+                    <a href="{% url "post_detail" slug=next_object.slug %}">{{ next_object.title }} &rarr;</a>
+                </li>
+            {% endif %}
+        {% endwith %}
+    </ul>
+{% endblock %}

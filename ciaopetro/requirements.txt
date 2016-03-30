@@ -1,0 +1,7 @@
+Django==1.9
+django-contrib-comments==1.6.2
+django-markdown==0.8.4
+django-tagging==0.4.1
+Markdown==2.6.6
+Pillow==3.1.1
+wheel==0.29.0
