@@ -1,4 +1,5 @@
 {% extends 'blog/../base.html' %}
+{% load i18n %}
 
 {% load django_markdown %}
 {% load comments %}
@@ -18,6 +19,15 @@
             {% if object.tags.all %}
                 <p class="tags">Tagged under {{ object.tags.all|join:", " }}</p>
             {% endif %}
+            <div class="row col-lg-12">
+                {% if object.gallery.description %}{{ object.gallery.description|safe }}{% endif %}
+                {% for photo in object.gallery.public %}
+                    <a href="{{ photo.get_absolute_url }}">
+                         <img src="{{ photo.get_thumbnail_url }}" class="thumbnail" alt="{{ photo.title }}">
+                    </a>
+                {% endfor %}
+            </div>
+
             <p>{{ object.text|markdown }}</p>
         </div>
     </div>

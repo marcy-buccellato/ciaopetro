@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 from tagging.fields import TagField
+from photologue.models import Gallery
 
 
 class PostQuerySet(models.QuerySet):
@@ -21,6 +22,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     tags = TagField()
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, null=True)
 
     objects = PostQuerySet().as_manager()
 
