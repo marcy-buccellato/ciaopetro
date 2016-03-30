@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'', include(blog_urls)),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^markdown/', include(markdown_urls)),
+    url(r'^photologue/', include('photologue.urls', namespace='photologue')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]

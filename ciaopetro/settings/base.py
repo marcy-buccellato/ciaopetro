@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     'django_comments',
     'django_markdown',
+    'photologue',
+    'sortedm2m',
 
     'blog',
     'tagging',
