@@ -1,0 +1,14 @@
+*\.idea*
+*\.pyc
+*.pyc
+__pycache__
+myvenv
+db.sqlite3
+/static
+.DS_Store
+.idea
+*/db.sqlite3
+blog/migrations/*
+ciaopetro/settings/production.py
+ciaopetro/wsgi.py
+main
