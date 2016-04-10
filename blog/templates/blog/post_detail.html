@@ -1,17 +1,24 @@
 {% extends 'blog/../base.html' %}
-{% load i18n %}
 
+{% load i18n %}
 {% load django_markdown %}
 {% load comments %}
+{% load static %}
 
 {% block page_title %}
     {{ object.title }} | {{ site.name }}
-{% endblock %}
+{% endblock page_title %}
+
+{% block extra_style %}
+    <!-- Photo Gallery style -->
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+
+{% endblock extra_style %}
 
 {% block content %}
     <div class="post post-detail">
         {% if object.featured_image %}
-            <img width="100%" height="356" src="{{ object.featured_image.url }}">
+            <img class="featured-image" width="100%" height="356" src="{{ object.featured_image.url }}">
         {% endif %}
         <div class="content">
             <h1 class="title">{{ object.title }}</h1>
@@ -19,19 +26,30 @@
             {% if object.tags.all %}
                 <p class="tags">Tagged under {{ object.tags.all|join:", " }}</p>
             {% endif %}
-            <div class="row col-lg-12">
-                {% if object.gallery.description %}{{ object.gallery.description|safe }}{% endif %}
-                {% for photo in object.gallery.public %}
-                    <a href="{{ photo.get_absolute_url }}">
-                         <img src="{{ photo.get_thumbnail_url }}" class="thumbnail" alt="{{ photo.title }}">
-                    </a>
-                {% endfor %}
-            </div>
 
             <p>{{ object.text|markdown }}</p>
         </div>
     </div>
-    <div class="comments">
+
+    {% if object.gallery %}
+        <div class="post-section">
+            <h3>Photos</h3>
+            <div class="fotorama"
+                 data-width="100%"
+                 data-height="376"
+                 data-autoplay="true"
+                 data-nav="thumbs">
+                {% for image in object.gallery.public %}
+                    <a href="/media/{{ image.image }}">
+                        <img src="{{ image.get_thumbnail_url }}"
+                            alt="{{ image.title }}">
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="comments post-section">
         <h3>Comments</h3>
         {% get_comment_count for object as comment_count %}
         <p>{{ comment_count }} comments have been posted.</p>
@@ -54,4 +72,10 @@
             {% endif %}
         {% endwith %}
     </ul>
-{% endblock %}
+{% endblock content %}
+
+{% block extra_script %}
+    <!-- Photo Gallery js -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
+
+{% endblock extra_script %}
