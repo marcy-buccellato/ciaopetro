@@ -3,5 +3,10 @@ django-contrib-comments==1.6.2
 django-markdown==0.8.4
 django-tagging==0.4.1
 Markdown==2.6.6
-Pillow==3.1.1
 wheel==0.29.0
+
+# Gallery
+django-photologue==3.5.1
+django-sortedm2m==1.2.0
+ExifRead==2.1.2
+Pillow==3.1.1
