@@ -46,11 +46,13 @@
                 <div class="col-md-3 sidebar">
                     <!--Sidebar content-->
                     <div class="border-bottom-grey padding-bottom-20">
+                        <!-- Sidebar header - website name -->
                         <h1 class="text-center">
                             <a href="/">{{ site.name }}</a>
                         </h1>
                     </div>
                     <div class="border-bottom-grey padding-bottom-20 padding-top-20">
+                        <!-- Navigation for flat pages -->
                         {% get_flatpages as flatpages %}
                         <ul class="list-unstyled sidebar-nav">
                             {% for page in flatpages %}
@@ -59,6 +61,7 @@
                         </ul>
                     </div>
                     <div class="padding-bottom-20">
+                        <!-- Navigation for post tags -->
                         <h2>Tags</h2>
                         <ul class="list-unstyled tags-list">
                             {% tags_for_model blog.Post as tags with counts %}
