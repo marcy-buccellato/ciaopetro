@@ -13,5 +13,5 @@ DATABASES = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../blog/static')
 
-# DEBUG = False
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+DEBUG = False
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
