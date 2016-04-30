@@ -8,7 +8,7 @@ db.sqlite3
 .DS_Store
 .idea
 */db.sqlite3
-#blog/migrations/*
+blog/migrations/*
 ciaopetro/settings/production.py
 ciaopetro/wsgi.py
 main

@@ -46,12 +46,11 @@ PREREQ_APPS = [
     'django_markdown',
     'photologue',
     'sortedm2m',
-
+    'tagging',
 ]
 
 PROJECT_APPS = [
     'blog',
-    'tagging',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
