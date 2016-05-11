@@ -145,26 +145,3 @@ MEDIA_URL = '/media/'
 PAGE_SIZE = 10
 
 SITE_ID = 1
-
-### Loggging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': 'log/django/debug.log',
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
-            'propagate': True,
-        },
-    },
-}
