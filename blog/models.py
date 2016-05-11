@@ -22,7 +22,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     tags = TagField()
-    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, null=True)
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, null=True, blank=True)
 
     objects = PostQuerySet().as_manager()
 
