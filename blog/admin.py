@@ -11,4 +11,11 @@ class PostAdmin(MarkdownModelAdmin):
     # Next line is a workaround for Python 2.x
     formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
 
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("title", "slug")
+    prepopulated_fields = {"slug": ("title",)}
+
 admin.site.register(models.Post, PostAdmin)
+admin.site.register(models.Category, CategoryAdmin)
+

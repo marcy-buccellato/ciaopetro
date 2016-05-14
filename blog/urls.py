@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 
 from tagging.views import TaggedObjectList
 
-from blog import feed, models
+from blog import feed, models, views
 
 urlpatterns = [
     url(r'^feed/$', feed.LatestPosts(), name="feed"),
@@ -22,4 +22,11 @@ urlpatterns = [
         DetailView.as_view(model=models.Post), name="post_detail"),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
+
+    # If no other urls are caught, assume it's a category: site/<category>
+    url(r'^(?P<category>[a-z\-]+)/$',
+        views.CategoryListView.as_view(
+            model=models.Post, paginate_by=settings.PAGE_SIZE,
+            allow_empty=True),
+        name='category_index'),
 ]
