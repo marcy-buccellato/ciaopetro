@@ -6,6 +6,12 @@ from tagging.fields import TagField
 from photologue.models import Gallery
 
 
+class CategoryQuerySet(models.QuerySet):
+    def posted(self):
+
+        return self.filter(post__category__isnull=False).distinct()
+
+
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(primary_key=True, max_length=200, unique=True)
@@ -36,7 +42,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     tags = TagField()
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default="home")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, default="life")
 
     objects = PostQuerySet().as_manager()
 

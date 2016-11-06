@@ -3,6 +3,7 @@ My personal Django-based blog at ciaopetro.com.
 
 Feel free to use this as a template for creating a basic blog with the added features: 
 - tagging ([django-tagging](https://github.com/Fantomas42/django-tagging/blob/develop/docs/index.rst))
+- categories
 - photo gallery ([django-photologue](https://github.com/jdriscoll/django-photologue) for management and [fotorama](http://fotorama.io/) for display)
 - commenting (to come)
 - automated xml sitemap ([Django builtin](https://docs.djangoproject.com/en/1.9/ref/contrib/sitemaps/))

@@ -1,6 +1,6 @@
 /* global classes */
 .border-bottom-grey {
-    border-bottom: 1px solid #27292b;
+    border-bottom: 1px solid #c0c0c0;
 }
 
 .border-top-grey {
@@ -53,6 +53,10 @@ a:hover {
 
 .sidebar h2 {
     font-size: 1em;
+}
+
+.sidebar .categories-list a {
+    font-size: 1.1em;
 }
 
 .sidebar .tags-list a {
