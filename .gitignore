@@ -12,3 +12,4 @@ blog/migrations/*
 ciaopetro/settings/production.py
 ciaopetro/wsgi.py
 main
+ciaopetro/media/*
