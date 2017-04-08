@@ -119,6 +119,20 @@ a:hover {
     color:rgba(0,0,0,0.7);
 }
 
+.post .image {
+   position: relative;
+   width: 100%; /* for IE 6 */
+}
+
+.post h2 {
+   position: absolute;
+    top: 282px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    opacity: .8;
+}
+
 .post img.featured-image {
     object-fit: cover;
 }
