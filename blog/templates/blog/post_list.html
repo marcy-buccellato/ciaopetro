@@ -3,14 +3,19 @@
 
 {% block content %}
     {% for post in object_list %}
-        <div class="post">
-            {% if post.featured_image %}
-                <a href="{% url 'post_detail' slug=post.slug %}">
-                    <img class="featured-image" width="100%" height="356" src="{{ post.featured_image.url }}">
-                </a>
-            {% endif %}
+        <div class="post post-item">
+            <div class="image">
+
+                {% if post.featured_image %}
+                    <a href="{% url 'post_detail' slug=post.slug %}">
+                        <img class="featured-image" width="100%" src="{{ post.featured_image.url }}">
+                    </a>
+                {% endif %}
+
+                <span class="title"><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></span>
+
+            </div>
             <div class="content text-center">
-                <h1 class="title"><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h1>
                 <p class="date">{{ post.published_date|date:"F d, Y" }}</p>
                 {% if post.tags.all %}
                     <p class="tags">Tagged under {{ post.tags.all|join:", " }}</p>
@@ -25,6 +30,7 @@
             </div>
         </div>
     {% endfor %}
+    <div style="clear: both"></div>
     {% if is_paginated %}
         <ul class="pager">
             <li {% if not page_obj.has_previous %}class="disabled"{% endif %}>

@@ -36,13 +36,14 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     text = models.TextField()
     short_description = models.TextField(blank=True, null=True)
-    featured_image = models.ImageField(
-        upload_to="photos/%Y/%m/%d", blank=True, null=True)
+    featured_image = models.ImageField(upload_to="photos/%Y/%m/%d")
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     tags = TagField()
-    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, default="life")
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, null=True,
+                                blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,
+                                 blank=False, default="life")
 
     objects = PostQuerySet().as_manager()
 
