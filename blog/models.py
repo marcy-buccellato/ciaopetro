@@ -10,15 +10,16 @@ from tagging.fields import TagField
 from photologue.models import Gallery
 
 
-class CategoryQuerySet(models.QuerySet):
+class CategoryManager(models.Manager):
     def posted(self):
-
         return self.filter(post__category__isnull=False).distinct()
 
 
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(primary_key=True, max_length=200, unique=True)
+
+    objects = CategoryManager()
 
     class Meta:
         ordering = ["title"]

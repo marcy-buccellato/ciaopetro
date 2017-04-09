@@ -4,7 +4,7 @@ import random
 from django import template
 from django.conf import settings
 
-from blog.models import Category, CategoryQuerySet
+from blog.models import Category
 
 register = template.Library()
 
@@ -30,11 +30,10 @@ def get_posted_categories(limit=0):
     :param limit int - limit number of categories to return:
     :return:
     """
-    categories = Category.objects.all()
+    categories_posted = Category.objects.posted()
 
     # Apply limit if provided
     if limit and isinstance(limit, int):
-        categories = categories[0:limit]
-    categories_posted = CategoryQuerySet.posted(categories)
+        categories_posted = categories_posted[0:limit]
 
     return categories_posted
