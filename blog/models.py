@@ -1,3 +1,7 @@
+from smartfields import fields
+from smartfields.dependencies import FileDependency
+from smartfields.processors import ImageProcessor
+
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
@@ -36,7 +40,12 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     text = models.TextField()
     short_description = models.TextField(blank=True, null=True)
-    featured_image = models.ImageField(upload_to="photos/%Y/%m/%d")
+    featured_image = fields.ImageField(
+        dependencies=[
+            FileDependency(processor=ImageProcessor(
+                format='JPEG', scale={'max_width': 1000, 'max_height': 1000}))
+        ],
+        upload_to="photos/%Y/%m/%d")
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     tags = TagField()
@@ -51,11 +60,11 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    def __str__(self):
-        return self.title
-
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"slug": self.slug})
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = "Blog Post"
